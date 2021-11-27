@@ -5,6 +5,7 @@ module "vpc" {
 
   name = "${var.environment}-vpc"
   cidr = var.vpc-cidr
+  version = "~> v2.0"
 
   azs             =  slice(data.aws_availability_zones.available.names, 0, var.subnet_count[terraform.workspace])
   private_subnets = var.private_subnets[terraform.workspace]
