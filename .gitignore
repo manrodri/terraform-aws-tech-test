@@ -72,3 +72,4 @@ override.tf.json
 terraform.rc
 
 .idea
+!/virginia.tfvars
