@@ -13,6 +13,7 @@ resource "aws_launch_configuration" "webapp_lc" {
   instance_type = var.instance_size[terraform.workspace]
   key_name = aws_key_pair.web.key_name
 
+
   security_groups = [
     aws_security_group.web-instance-security-group.id,
 
@@ -54,7 +55,7 @@ resource "aws_autoscaling_group" "webapp_asg" {
     create_before_destroy = true
   }
 
-  vpc_zone_identifier   = module.vpc.private_subnets
+  vpc_zone_identifier   = module.vpc.public_subnets
   name                  = "ddt_webapp_asg-${terraform.workspace}"
   max_size              = var.asg_max_size[terraform.workspace]
   min_size              = var.asg_min_size[terraform.workspace]
