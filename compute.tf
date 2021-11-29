@@ -11,7 +11,7 @@ resource "aws_launch_configuration" "webapp_lc" {
   name_prefix   = "${terraform.workspace}-demo-"
   image_id      = data.aws_ami.aws_linux.image_id
   instance_type = var.instance_size[terraform.workspace]
-  key_name = aws_key_pair.web.key_name
+  key_name      = aws_key_pair.web.key_name
 
 
   security_groups = [
@@ -46,7 +46,7 @@ resource "aws_elb" "webapp_elb" {
 
   security_groups = [aws_security_group.web-instance-security-group.id]
 
-  tags = merge(local.common_tags, {"Name": "${terraform.workspace}-elb"})
+  tags = merge(local.common_tags, { "Name" : "${terraform.workspace}-elb" })
 
 }
 

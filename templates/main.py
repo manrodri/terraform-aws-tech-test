@@ -7,8 +7,12 @@ from datetime import datetime
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+table_name = os.environ.get('TABLE_NAME')
+label_key = os.environ.get('LABEL_KEY')
+label_value = os.environ.get('LABEL_VALUE')
+
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('instance_state')
+table = dynamodb.Table(table_name)
 
 
 def get_instances(label_key: str, label_value: str) -> list:
@@ -47,7 +51,7 @@ def add_item(instance_id: str, instance_state_name: str, instance_state_code: st
 
 def lambda_handler(event, context):
 
-    instances = get_instances(label_key="Owner", label_value="Manuel Rodriguez")
+    instances = get_instances(label_key=label_key, label_value=label_value)
     instances_data = get_instances_data(instances)
 
     for instance, data in instances_data.items():

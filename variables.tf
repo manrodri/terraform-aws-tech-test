@@ -1,7 +1,7 @@
 # provider
 
 variable "region" {
-  type = string
+  type    = string
   default = "eu-west-1"
 }
 
@@ -12,8 +12,8 @@ variable "vpc-cidr" {
 
 # environment
 
-variable environment {
-  type = string
+variable "environment" {
+  type    = string
   default = "development"
 }
 
@@ -33,7 +33,7 @@ variable "public_key" {
   default = "~/.ssh/id_rsa.pub"
 }
 
-variable instance_size {
+variable "instance_size" {
   type = map(string)
 }
 
@@ -46,13 +46,41 @@ variable "asg_min_size" {
 }
 
 
+### lambdas
+
+variable "filename" {
+  type = string
+}
+
+variable "lambda_function_name" {
+  type = string
+}
+
+variable "filename_delete" {
+  type = string
+}
+
+variable "lambda_handler_delete" {
+  type = string
+  default = "delete_items.lambda_handler"
+}
+
+variable "lambda_handler" {
+  type    = string
+  default = "main.lambda_handler"
+}
+
+variable "lambda_function_name_delete" {
+  type = string
+}
+
 ######## locals
 
 locals {
   common_tags = {
-    Owner: "Manuel Rodriguez"
-    Project: "Tech Test",
-    Environment: terraform.workspace
+    Owner : "Manuel Rodriguez"
+    Project : "Tech Test",
+    Environment : terraform.workspace
   }
 }
 
